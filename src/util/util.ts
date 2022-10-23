@@ -14,7 +14,7 @@ export async function filterImageFromURL(inputURL: string | any): Promise<string
         try {
             const photo = await Jimp.read(inputURL);
             const outpath =
-                "/tmp/filtered." + Math.floor(Math.random() * 2000) + ".jpg";
+                "\\tmp\\filtered." + Math.floor(Math.random() * 2000) + ".jpg";
             await photo
                 .resize(256, 256) // resize
                 .quality(60) // set JPEG quality
@@ -52,7 +52,7 @@ export function isValidImageUrl(url: string | any): boolean {
         return false
     }
 
-    console.log('finish checking ....');
+    //console.log('finish checking ....');
 
     //return validUrl.isUri(url)
     // if (validUrl.isUri(url)) {

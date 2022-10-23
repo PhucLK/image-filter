@@ -42,21 +42,22 @@ import { filterImageFromURL, deleteLocalFiles, isValidImageUrl } from './util/ut
     console.log('get request .....');
     const image_url = req.query['image_url']
     console.log(image_url);
-    
-    //try {
-    if (image_url || isValidImageUrl(image_url)) {
-      const response_url = await filterImageFromURL(image_url)
-      deleteLocalFiles([response_url].flat())
-      res.send(response_url)
-    } else {
-      res.status(422).send({ "message": "Valid URL must be provided" })
+
+    try {
+      if (image_url || isValidImageUrl(image_url)) {
+        const response_url = await filterImageFromURL(image_url)
+        
+        res.send(response_url)
+        deleteLocalFiles([response_url].flat())
+      } else {
+        res.status(422).send({ "message": "Valid URL must be provided" })
+      }
+    } catch (error) {
+      console.log(error)
+      res.status(422).send(
+        { "message": "Valid URL must be provided" }
+      )
     }
-    // } catch (error) {
-    //   console.log(error)
-    //   res.status(404).send({
-    //     "error": ',,'
-    //   })
-    // }
   });
 
 
